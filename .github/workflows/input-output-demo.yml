@@ -54,7 +54,7 @@ jobs:
         path: cardlog.log
     - name: Configure git
       run: |
-       git config user.name "Shweta"
+       git config user.name "shweta023"
        git config user.email "shweta.023sharma@gmail.com"
     - name: Commit and push file
       run: |
