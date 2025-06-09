@@ -23,7 +23,7 @@ jobs:
      run: |
        cardNo="${{github.event.inputs.cardno}}" 
        len=${#cardNo}
-       echo "Length:$cardNo"
+       echo "Length:$len"
        if [ $len -lt 10 ]; then
          echo "Card No is invalid"
        else
