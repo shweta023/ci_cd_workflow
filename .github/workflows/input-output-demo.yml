@@ -34,6 +34,10 @@ jobs:
  shows-inputs:
    runs-on: ubuntu-latest
    steps:
+    - name: checkout master
+      uses: actions/setup-python@v4
+      with:
+       ref: master
     - name: Print the input values
       run: |
        echo "Card No: ${{github.event.inputs.cardno}}" >> cardlog.log
