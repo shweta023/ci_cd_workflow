@@ -16,6 +16,19 @@ on:
        - amex
       default: master 
 jobs:
+ validate-length:
+  runs-on: ubuntu-latest
+  steps:
+   - name: Check Credit Card Number Of Digits
+     run: |
+       cardNo="${{github.event.inputs.cardno}}" 
+       len=${#cardNo}
+       echo "Length:$cardNo"
+       if [ $len -lt 10 ]; then
+         echo "Card No is invalid"
+       else
+         echo "Card No is Valid"
+       fi   
  shows-inputs:
    runs-on: ubuntu-latest
    steps:
