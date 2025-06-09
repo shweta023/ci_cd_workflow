@@ -17,7 +17,7 @@ jobs:
       - name: Use global environment variable
         run: echo "Folder Name:${FOLDERNAME}"
       - name: Use github environment variable
-        run: echo "Folder Name:$GITFOLDERNAME and Username:$USERNAME"
+        run: echo "Folder Name:$GITFOLDERNAME and Username:$GITUSERNAME"
   build:
     runs-on: ubuntu-latest
 
