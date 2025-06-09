@@ -11,14 +11,11 @@ env:
   GITFOLDERNAME: ${{vars.FOLDERNAME}}
   GITUSERNAME: ${{vars.USERNAME}}
 jobs:
-  local_var_job:
+  combined:
     runs-on: ubuntu-latest
     steps:
       - name: Use global environment variable
         run: echo "Folder Name:${FOLDERNAME}"
-  github_var_job:
-    runs-on: ubuntu-latest
-    steps:
       - name: Use github environment variable
         run: echo "Folder Name:$GITFOLDERNAME and Username:$USERNAME"
   build:
