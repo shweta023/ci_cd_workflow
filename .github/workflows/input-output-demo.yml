@@ -36,7 +36,7 @@ jobs:
  shows-inputs:
    runs-on: ubuntu-latest
    steps:
-    - name: checkout master
+    - name: checkout main
       uses: actions/setup-python@v4
       with:
        ref: master
