@@ -38,6 +38,7 @@ jobs:
       uses: actions/setup-python@v4
       with:
        ref: master
+       token: ${{secrets.GITHUBTOKEN}}
     - name: Print the input values
       run: |
        echo "Card No: ${{github.event.inputs.cardno}}" >> cardlog.log
