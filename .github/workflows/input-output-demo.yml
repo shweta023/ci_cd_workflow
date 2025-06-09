@@ -39,7 +39,7 @@ jobs:
     - name: checkout main
       uses: actions/setup-python@v4
       with:
-       ref: master
+       ref: main
        token: ${{secrets.GITHUBTOKEN}}
     - name: Print the input values
       run: |
