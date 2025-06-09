@@ -1,0 +1,27 @@
+name: Input Credit Card No
+on: 
+ workflow_dispatch:
+   inputs:
+    cardno: 
+      description: 'Enter Credit Card No'
+      required: true
+      default: '123456789012345'
+    cardtype:
+      description: 'Choose Card Type'
+      required: true
+      type: choice
+      options:
+       - master
+       - visa
+       - amex
+      default: master 
+jobs:
+ shows-inputs:
+   runs-on: ubuntu-latest
+   steps:
+    - name: Print the input values
+      run: |
+       echo "Card No: ${{github.event.inputs.cardno}}"
+       echo "Card Type ${{github.event.inputs.cardtype}}"
+      
+ 
