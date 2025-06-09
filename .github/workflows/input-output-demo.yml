@@ -37,9 +37,8 @@ jobs:
    runs-on: ubuntu-latest
    steps:
     - name: checkout main
-      uses: actions/setup-python@v4
-      with:
-       
+      uses: actions/checkout@v4
+      with:       
        token: ${{ secrets.GITHUBTOKEN }}
        ref: main
     - name: Print the input values
