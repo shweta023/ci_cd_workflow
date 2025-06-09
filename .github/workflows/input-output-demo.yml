@@ -15,6 +15,8 @@ on:
        - visa
        - amex
       default: master 
+permissions:
+ contents: write
 jobs:
  validate-length:
   runs-on: ubuntu-latest
