@@ -1,0 +1,49 @@
+name: Input Credit Card No
+on: 
+ workflow_dispatch:
+   inputs:
+    cardno: 
+      description: 'Enter Credit Card No'
+      required: true
+      default: '123456789012345'
+    cardtype:
+      description: 'Choose Card Type'
+      required: true
+      type: choice
+      options:
+       - master
+       - visa
+       - amex
+      default: master 
+jobs:
+ validate-length:
+  runs-on: ubuntu-latest
+  steps:
+   - name: Check Credit Card Number Of Digits and push to log file
+     run: |
+       echo "Stating the validation process" > cardlog.log
+       cardNo="${{github.event.inputs.cardno}}" 
+       echo "$Card No : $cardNo" >> cardlog.log
+       len=${#cardNo}
+       echo "Length:$len" >> cardlog.log
+       if [ $len -lt 10 ]; then
+         echo "Card No is invalid" >> cardlog.log
+       else
+         echo "Card No is Valid" >> cardlog.log
+       fi   
+ shows-inputs:
+   runs-on: ubuntu-latest
+   steps:
+    - name: Print the input values
+      run: |
+       echo "Card No: ${{github.event.inputs.cardno}}" >> cardlog.log
+       echo "Card Type ${{github.event.inputs.cardtype}}" >> cardlog.log
+    - name: Show the content of log file
+      run: cat cardlog.log
+    - name: Upload the log file
+      uses: actions/upload-artifact@v4
+      with:
+        name: log-file
+        path: cardlog.log
+      
+ 
