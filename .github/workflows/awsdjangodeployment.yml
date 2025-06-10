@@ -53,7 +53,7 @@ jobs:
           pwd
           ls
           cd  ./trainingjun2025/employeeapidocker
-          docker network create mtsnetwork
+          #docker network create mtsnetwork
           sudo docker-compose --env-file=env.dev up -d --build"
 
      
