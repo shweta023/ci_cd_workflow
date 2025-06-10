@@ -1,6 +1,18 @@
 name: Deploy Django App to EC2
 
 on:
+  workflow_dispatch:
+    inputs:
+      env:
+        description: 'Environment to deploy (dev, test, prod)'
+        required: true
+        default: '.env.dev'
+        type: choice
+        options:
+          - .env.dev
+          - .env.test
+          - .env.prod
+
   push:
     branches: [ main ]
     
@@ -19,7 +31,7 @@ jobs:
 
       - name: Copy files to EC2
         run: |
-          rsync -avz -e "ssh -i ec2_key.pem -o StrictHostKeyChecking=no" ./day1 ${{ secrets.EC2_HOST }}:/home/ubuntu/trainingjun2025
+          rsync -avz -e "ssh -i ec2_key.pem -o StrictHostKeyChecking=no" ./employeeapidocker ${{ secrets.EC2_HOST }}:/home/ubuntu/trainingjun2025
 
       - name: Run Python app on EC2
         run: |
