@@ -184,7 +184,7 @@ WSGI_APPLICATION = 'employee_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('POSTGRES_DATABASE'),
+        'NAME': os.getenv('POSTGRES_DATABASE_DEV'),
         'USER': os.getenv('POSTGRES_USER'),
         'PASSWORD':os.getenv('POSTGRES_PASSWORD'),
         'HOST': 'mtspostgres',
