@@ -22,7 +22,7 @@ jobs:
       - name: Checkout master
         uses: actions/checkout@v4
         with:
-         token: ${{ secrets.GITTOKEN }}
+         token: ${{ secrets.GITHUBTOKEN }}
          ref: main
 
       - name: Setup SSH Key
