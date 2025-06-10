@@ -1,4 +1,5 @@
-name: Deploy aws Django
+name: Deploy AWS Django
+
 
 on:
   workflow_dispatch:
@@ -6,20 +7,21 @@ on:
       env:
         description: 'Environment to deploy (dev, test, prod)'
         required: true
-        default: 'env.dev'
+        default: '.env.dev'
         type: choice
         options:
           - env.dev
           - env.test
           - env.prod
 
+  
     
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout master
+      - name: Checkout main
         uses: actions/checkout@v4
         with:
          token: ${{ secrets.GITHUBTOKEN }}
@@ -39,8 +41,9 @@ jobs:
 
       - name: Set environment variable for Docker Compose
         run: | 
-          ssh -i ec2_key.pem -o StrictHostKeyChecking=no ${{ secrets.EC2_HOST }} 
-          "echo "DJANGO_ENV=${{ github.event.inputs.env }}" >> $GITHUB_ENV"
+          #ssh -i ec2_key.pem -o StrictHostKeyChecking=no ${{ secrets.EC2_HOST }} " 
+           echo "DJANGO_ENV=${{ github.event.inputs.env }}" >> $GITHUB_ENV
+           echo ${DJANGO_ENV}
 
       - name: Run Docker Compose
         run: |
@@ -49,5 +52,7 @@ jobs:
           ssh -i ec2_key.pem -o StrictHostKeyChecking=no ${{ secrets.EC2_HOST }} "
           pwd
           ls
-          cd  ./trainingjun2025/employeeapidocker/
-          docker-compose --env-file= env.dev up -d --build"
+          cd  ./trainingjun2025/employeeapidocker
+          sudo docker-compose --env-file=env.dev up -d --build"
+
+     
