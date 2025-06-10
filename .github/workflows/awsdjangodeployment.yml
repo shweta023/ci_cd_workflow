@@ -13,16 +13,17 @@ on:
           - .env.test
           - .env.prod
 
-  push:
-    branches: [ main ]
     
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout master
         uses: actions/checkout@v4
+        with:
+         token: ${{ secrets.GITTOKEN }}
+         ref: main
 
       - name: Setup SSH Key
         run: |
