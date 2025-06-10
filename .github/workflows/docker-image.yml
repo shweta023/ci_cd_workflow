@@ -32,6 +32,6 @@ jobs:
           context: .
           push: true
           file: ./employeeapidocker/Dockerfile     # Path to Dockerfile
-          tags: ${{ secrets.DOCKER_USERNAME }}/employee-k-app:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/employee-app:latest
           
      
