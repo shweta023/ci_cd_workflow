@@ -31,4 +31,4 @@ jobs:
 
       - name: Run the Python Code
         run: |
-          python ${FOLDERNAME}/currentdateime.py
+          python ${FOLDERNAME}/currentdatetime.py
