@@ -44,5 +44,10 @@ jobs:
 
       - name: Run Docker Compose
         run: |
+          pwd
+          ls
           ssh -i ec2_key.pem -o StrictHostKeyChecking=no ${{ secrets.EC2_HOST }} "
-          docker-compose --env-file=./trainingjun2025/employeeapidocker/env.dev up -d --build"
+          pwd
+          ls
+          cd  ./trainingjun2025/employeeapidocker/
+          docker-compose --env-file= env.dev up -d --build"
