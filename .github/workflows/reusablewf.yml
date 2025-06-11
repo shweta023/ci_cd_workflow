@@ -24,6 +24,8 @@ jobs:
     - run: echo "Credit card type ${{ inputs.cardtype }}"
   validate-length:
    runs-on: ubuntu-latest
+   outputs: 
+     message: ${{ steps.set-output.outputs.message }}
    steps:
    - name: Check Credit Card Number Of Digits and Push to Log file
      run: |
@@ -39,9 +41,7 @@ jobs:
        fi   
    - name: Show the contents from log file
      run: cat cardlog.log
-   outputs: 
-     message: ${{ steps.set-output.outputs.message }}
-     run: |
-          message=cat card.log >> $GITHUB_OUTPUT
-
-   
+   - name: Set Output Values
+     id: set-output
+     run: echo "message=hi" >> $GITHUB_OUTPUT
+  
