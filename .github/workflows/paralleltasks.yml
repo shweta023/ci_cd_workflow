@@ -4,20 +4,24 @@ name: Parallel Python Matrix
 on:
   push:
     branches: [ main ]  
-
+    #paths:
+      #- ./day1/**
 jobs:
-  run-scripts:
+  generate-matrix:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        script-path:
-          - ./day1/setdemo.py
-          - ./day1/otpgenerator.py
-          - ./day1/typeconversion.py
-
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        
+      - name: Generate list of files
+        #since the step is referred in another place uniquess identified by id
+        id: set-matrix
+        run: |
+         files=$( find ./day1 -type f -name "*.py" | jq -R -s -c 'split("\n")[:-1]' )
+         echo "matrix=$files"
+         echo "matrix=$files" >> $GITHUB_OUTPUT
       - name: Cache pip packages
         uses: actions/cache@v4
         with:
@@ -29,10 +33,21 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
-      
+         
       - name: Install dependencies
         run: |
           pip install -r ./day1/requirements.txt
-
-      - name: Run ${{ matrix.script-path }}
-        run: python ${{ matrix.script-path }}
+  run-job:
+    needs: generate-matrix
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+       file: ${{ fromJson(needs.generate-matrix.outputs.matrix) }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+             
+      - name: Run Python file
+        run: |
+          echo "Running file: ${{ matrix.file }}"
+          python ${{ matrix.file }}
