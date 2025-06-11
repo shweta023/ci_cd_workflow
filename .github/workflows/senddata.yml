@@ -1,0 +1,13 @@
+name: Send Data
+permissions:
+ contents: write
+on: 
+ workflow_dispatch:
+
+jobs:
+  call-reusable:
+   uses: ./.github/workflows/reusablewf.yml
+   with: 
+     cardno: 45843858438
+     cardtype: visa
+     
