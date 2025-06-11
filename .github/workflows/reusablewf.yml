@@ -12,6 +12,10 @@ on:
       required: true
       type: string
       #default: 'master'
+  outputs:
+   message:
+    description: "Status of Card no validation"
+    value: ${{ jobs.return-data.outputs.message }}
 jobs:
   display:
    runs-on: ubuntu-latest
@@ -33,4 +37,11 @@ jobs:
        else
          echo "Card No is Valid" >> cardlog.log
        fi   
-       
+   - name: Show the contents from log file
+     run: cat cardlog.log
+   outputs: 
+     message: ${{ steps.set-output.outputs.message }}
+     run: |
+          message=cat card.log >> $GITHUB_OUTPUT
+
+   
