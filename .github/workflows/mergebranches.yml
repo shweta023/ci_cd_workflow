@@ -30,7 +30,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUBTOKEN }}
         run: |
           git switch main
-          git merge origin/feature2 -m "Auto-merge feature into main" --allow-unrelated-histories
+          git merge origin/feature -m "Auto-merge feature into main" --allow-unrelated-histories
           #git add .
           #git commit -m "updated"
           git rebase main
