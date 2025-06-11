@@ -1,0 +1,38 @@
+# .github/workflows/parallel-python-matrix.yml
+name: Parallel Python Matrix
+
+on:
+  push:
+    branches: [ master ]  
+
+jobs:
+  run-scripts:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        script-path:
+          - ./day1/setdemo.py
+          - ./day1/otpgenerator.py
+          - ./day1/typeconversion.py
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Cache pip packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/day1/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-  
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      
+      - name: Install dependencies
+        run: |
+          pip install -r ./day1/requirements.txt
+
+      - name: Run ${{ matrix.script-path }}
+        run: python ${{ matrix.script-path }}
