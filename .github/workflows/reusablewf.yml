@@ -36,12 +36,16 @@ jobs:
        echo "Length:$len" >> cardlog.log
        if [ $len -lt 10 ]; then
          echo "Card No is invalid" >> cardlog.log
+         response="Card No is invalid"
        else
          echo "Card No is Valid" >> cardlog.log
+         response="Card No is Valid"
        fi   
    - name: Show the contents from log file
      run: cat cardlog.log
    - name: Set Output Values
      id: set-output
-     run: echo "message=hi" >> $GITHUB_OUTPUT
-  
+     run: |
+       message=${response}
+       echo "$message" >> $GITHUB_OUTPUT
+   
