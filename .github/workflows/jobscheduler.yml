@@ -1,0 +1,28 @@
+name: ClockScheduler
+
+on:
+  schedule:                    # Auto trigger every 5 mins
+    - cron: '*/5 * * * *'
+
+jobs:
+  run-daily-cleanup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+         token: ${{ secrets.GITHUBTOKEN }}
+         ref: main
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13.2'
+
+      - name: Install dependencies (if any)
+        run: |
+          python -m pip install --upgrade pip
+
+      - name: Run cleanup script
+        run: python day1/currentdateime.py
