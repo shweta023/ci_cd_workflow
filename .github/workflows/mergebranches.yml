@@ -1,0 +1,39 @@
+name: Auto Merge dev into main
+
+on:
+  workflow_dispatch:   # manually trigger
+  push:
+    branches:
+      - feature           # or run on dev pushes
+
+jobs:
+  auto-merge:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+         token: ${{ secrets.GITTOKEN }}
+         ref: main
+
+      - name: Configure Git
+        run: |
+          git config user.name "shweta023"
+          git config user.email "shweta.023sharmaa@gmail.com"
+
+      - name: Fetch all branches
+        run: git fetch origin
+
+      - name: Merge feature into main
+        env:
+          GH_TOKEN: ${{ secrets.GITHUBTOKEN }}
+        run: |
+          git switch main
+          git merge origin/feature2 -m "Auto-merge feature into main" --allow-unrelated-histories
+          #git add .
+          #git commit -m "updated"
+          git rebase main
+          git push origin main
+          #git branch -d origin/feature
+          #git push origin -d origin/feature
