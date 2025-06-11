@@ -1,4 +1,4 @@
-name: Send Data
+name: Send data Work Flow
 permissions:
  contents: write
 on: 
@@ -8,6 +8,6 @@ jobs:
   call-reusable:
    uses: ./.github/workflows/reusablewf.yml
    with: 
-     cardno: 45843858438
+     cardno: 427843858490
      cardtype: visa
      
