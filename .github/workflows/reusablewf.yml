@@ -1,0 +1,20 @@
+on:
+ workflow_call:
+  inputs:
+    cardno: 
+      description: 'Enter Credit Card No'
+      type: string
+      required: true
+      default: '123456789012345'
+    cardtype:
+      description: 'Choose Card Type'
+      required: true
+      type: string
+      default: 'main'
+jobs:
+  display:
+   runs-on: ubuntu-latest
+   steps:
+    - run: echo "My credit card no ${{ inputs.cardno }}"
+    - run: echo "Credi card type ${{ inputs.cardtype }}"
+   
