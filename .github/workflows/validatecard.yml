@@ -1,0 +1,10 @@
+name: Invoke External Work Flow
+permissions:
+ contents: write
+on: 
+ workflow_dispatch:
+
+jobs:
+  call-reusable:
+   uses: ./.github/workflows/reusablewf.yml
+     
