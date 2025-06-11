@@ -2,7 +2,7 @@ name: ClockScheduler
 
 on:
   schedule:                    # Auto trigger every 5 mins
-    - cron: '*/5 * * * *'
+    - cron: '*/1 * * * *'
 
 jobs:
   run-daily-cleanup:
