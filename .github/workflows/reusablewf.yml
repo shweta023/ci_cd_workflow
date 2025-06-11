@@ -6,16 +6,31 @@ on:
       description: 'Enter Credit Card No'
       type: string
       required: true
-      default: '123456789012345'
+      #default: '123456789012345'
     cardtype:
       description: 'Choose Card Type'
       required: true
       type: string
-      default: 'master'
+      #default: 'master'
 jobs:
   display:
    runs-on: ubuntu-latest
    steps:
     - run: echo "My credit card no ${{ inputs.cardno }}"
-    - run: echo "Credi card type ${{ inputs.cardtype }}"
-   
+    - run: echo "Credit card type ${{ inputs.cardtype }}"
+  validate-length:
+   runs-on: ubuntu-latest
+   steps:
+   - name: Check Credit Card Number Of Digits and Push to Log file
+     run: |
+       echo "Starting the validation process" > cardlog.log
+       cardNo="${{ inputs.cardno }}" 
+       echo "Card No:$cardNo" >> cardlog.log
+       len=${#cardNo}
+       echo "Length:$len" >> cardlog.log
+       if [ $len -lt 10 ]; then
+         echo "Card No is invalid" >> cardlog.log
+       else
+         echo "Card No is Valid" >> cardlog.log
+       fi   
+       
